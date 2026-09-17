@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day | Time24.cc</title>
+    <style>
+        /* This sets up a default styling for the page */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 100px;
+            transition: background-color 0.5s ease; /* Makes the color transition smooth */
+        }
+        .container {
+            /* background-color: rgba(255, 255, 255, 0.8); */
+            display: inline-block;
+            color: #fff;
+            padding: 20px 40px;
+            border-radius: 10px;
+            /* box-shadow: 0 4px 6px rgba(0,0,0,0.1); */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Today is <span id="day-of-week">...</span>!</h1>
+    </div>
+
+    <script>
+        const dayNameOfWeek = [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ]
+        const colors = [
+            "#3c4142", // 0 = Sunday     (Gray)
+            "#ffca01", // 1 = Monday     (Yellow)
+            "#273e06", // 2 = Tuesday    (Green)
+            "#a94064", // 3 = Wednesday  (Pink)
+            "#a94064", // 4 = Thursday   (Blue)
+            "#c30f16", // 5 = Friday     (Red)
+            "#7b3f00"  // 6 = Saturday   (Brown)
+        ];
+
+        // Look up the current date
+        const today = new Date();
+
+        // Get the day of the week as a number from 0 to 6
+        const dayOfWeek = today.getDay();
+
+        // Select the color from our list that matches today's number
+        const todaysColor = colors[dayOfWeek];
+
+        // Apply that color to the page body
+        document.body.style.backgroundColor = todaysColor;
+
+        // Tell the day of the week
+        document.getElementById('day-of-week').innerText = dayNameOfWeek[dayOfWeek]
+    </script>
+
+</body>
+</html>

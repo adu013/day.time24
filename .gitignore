@@ -1,0 +1,18 @@
+# Local environment variables / secrets
+.env
+.env.local
+secrets.txt
+
+# Operating System files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Code Editor and IDE configurations
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp

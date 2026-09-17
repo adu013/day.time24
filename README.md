@@ -17,6 +17,15 @@ You do not need to install anything or run any setup terminal commands.
 ## File Structure
 * `index.html` - The core structure and entry point of the application.
 
+```text
+day.time24/
+├── src/
+│   └── index.html  # The entry point of the application.
+├── .gitignore
+├── LICENSE
+└── README.md
+```
+
 ## Customization
 If you want to change the colors for specific days, open the style configurations in your code editor and swap out the hex codes (e.g., `#7d53b0`) with your preferred palette.
 

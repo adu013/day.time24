@@ -5,27 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Day | Time24.cc</title>
     <style>
-        /* This sets up a default styling for the page */
+        /* Base page layout resetting margins and centering content vertically and horizontally */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            padding-top: 100px;
-            transition: background-color 0.5s ease; /* Makes the color transition smooth */
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.5s ease;
+            box-sizing: border-box;
         }
+
         .container {
-            /* background-color: rgba(255, 255, 255, 0.8); */
-            display: inline-block;
             color: #fff;
-            padding: 20px 40px;
-            border-radius: 10px;
-            /* box-shadow: 0 4px 6px rgba(0,0,0,0.1); */
+            padding: 5vw;
+            width: 90%;
+            max-width: 1200px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Fluid Typography: Scales smoothly based on the screen width */
+        h1 {
+            /* Minimum size: 36px, Ideal scaling size: 6vw, Maximum size: 90px */
+            font-size: clamp(36px, 6vw, 90px);
+            margin: 0 0 20px 0;
+            line-height: 1.2;
+        }
+
+        h2 {
+            /* Minimum size: 24px, Ideal scaling size: 4vw, Maximum size: 60px */
+            font-size: clamp(24px, 4vw, 60px);
+            margin: 0;
+            font-weight: bold;
+            opacity: 0.95;
+            letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Today is <span id="day-of-week">...</span>!</h1>
+        <h1><span id="day-of-week">...</span></h1>
+        <h2 id="week-status">Week: -- ----</h2>
     </div>
 
     <script>
@@ -37,16 +61,29 @@
           "Thursday",
           "Friday",
           "Saturday"
-        ]
+        ];
         const colors = [
             "#3c4142", // 0 = Sunday     (Gray)
-            "#ffca01", // 1 = Monday     (Yellow)
+            "#ffc800", // 1 = Monday     (Yellow)
             "#273e06", // 2 = Tuesday    (Green)
             "#a94064", // 3 = Wednesday  (Pink)
             "#000042", // 4 = Thursday   (Blue)
             "#c30f16", // 5 = Friday     (Red)
             "#7b3f00"  // 6 = Saturday   (Brown)
         ];
+
+        // Function to calculate standard ISO week number
+        function getISOWeekNumber(date) {
+            const target = new Date(date.valueOf());
+            const dayNr = (date.getDay() + 6) % 7;
+            target.setDate(target.getDate() - dayNr + 3);
+            const firstThursday = target.valueOf();
+            target.setMonth(0, 1);
+            if (target.getDay() !== 4) {
+                target.setMonth(0, 1 + ((4 - target.getDay()) + 7) % 7);
+            }
+            return 1 + Math.ceil((firstThursday - target) / 604800000);
+        }
 
         // Look up the current date
         const today = new Date();
@@ -61,7 +98,14 @@
         document.body.style.backgroundColor = todaysColor;
 
         // Tell the day of the week
-        document.getElementById('day-of-week').innerText = dayNameOfWeek[dayOfWeek]
+        document.getElementById('day-of-week').innerText = dayNameOfWeek[dayOfWeek].toUpperCase();
+
+        // Calculate week number and even/odd parity
+        const weekNumber = getISOWeekNumber(today);
+        const parity = (weekNumber % 2 === 0) ? "EVEN" : "ODD";
+
+        // Display the "Week: XX EVEN/ODD" line
+        document.getElementById('week-status').innerText = `Week: ${weekNumber} ${parity}`;
     </script>
 
 </body>

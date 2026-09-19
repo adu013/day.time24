@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Customize | Time24.cc</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #1a1a1a;
+            color: #fff;
+            box-sizing: border-box;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 650px;
+            text-align: left;
+        }
+
+        h1 {
+            font-size: clamp(28px, 4vw, 48px);
+            margin: 0 0 10px 0;
+            font-weight: bold;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: clamp(16px, 2vw, 20px);
+            color: #888;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin: 30px 0 10px 0;
+            color: #ffc800;
+        }
+
+        ol, ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 12px;
+            color: #ccc;
+        }
+
+        strong {
+            color: #fff;
+        }
+
+        a {
+            color: #ffc800;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            color: #888;
+        }
+
+        .back-link:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>HOW TO CUSTOMIZE</h1>
+        <div class="subtitle">Sync your theme using only your GitHub Username.</div>
+
+        <h2>1. Fork the Repository</h2>
+        <p>Go to the official repository at <a href="https://github.com/adu013/day.time24" target="_blank">://github.com</a> and click the <strong>Fork</strong> button in the top right corner to create a copy under your account.</p>
+
+        <h2>2. Edit Your Colors</h2>
+        <p>Open the <strong>colors.txt</strong> file in your fork, click the edit pencil icon, and change the 7 lines to your preferred hex codes (Line 1 is Sunday, Line 7 is Saturday). Commit and save your changes.</p>
+
+        <h2>3. Enter Your Username</h2>
+        <ol>
+            <li>Return to <strong>Time24.cc</strong> and click <strong>Customize</strong>.</li>
+            <li>Type in your exact <strong>GitHub Username</strong> (e.g., <span style="font-family: monospace; color: #aaa;">octocat</span>).</li>
+            <li>Press <strong>Save & Sync</strong>. Your browser handles the rest!</li>
+        </ol>
+
+        <a href="/" class="back-link">← Return to Time24.cc</a>
+    </div>
+
+</body>
+</html>

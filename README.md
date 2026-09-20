@@ -2,7 +2,7 @@
 A simple lightweight HTML page to quickly check color-coded days of the week.
 
 ## 🧠 Why the daily color shifts?
-Time24 uses **visual grounding** to combat "time blindness" and cognitive fatigue. By shifting the entire interface background to a distinct, high-contrast palette each day, the site creates an unmissable visual boundary every time you open or refresh the page. Over time, your brain builds an automatic association with these ambient tones—allowing you to glance at your browser tab and instantly ground yourself in exactly what day of the week it is without reading a single pixel of text.
+Day.Time24 uses **visual grounding** to combat "time blindness" and cognitive fatigue. By shifting the entire interface background to a distinct, high-contrast palette each day, the site creates an unmissable visual boundary every time you open or refresh the page. Over time, your brain builds an automatic association with these ambient tones—allowing you to glance at your browser tab and instantly ground yourself in exactly what day of the week it is without reading a single pixel of text.
 
 ## ✨ Features
 * **Visual Anchors:** Displays each day of the week (Sunday through Saturday) with distinct background colors.
@@ -18,18 +18,21 @@ You do not need to install anything or run any setup terminal commands.
 3. **Double-click** the `index.html` file to launch the dashboard instantly in your default web browser.
 
 ## 📁 File Structure
-* `index.html` - The core structure and entry point of the application.
+The project maintains a clean, hyper-minimalist file architecture to ensure lightning-fast load times and simple maintenance:
 
 ```text
 day.time24/
-├── src/
-│   ├── how-to-customize/
-│   │   └── index.html
-│   └── index.html  # The entry point of the application.
-├── .gitignore
-├── colors.txt
-├── LICENSE
-└── README.md
+├── .github/
+│   └── workflows/
+│       └── verify-colors.yml   # CI automation script to validate theme configurations
+├── how-to-customize/
+│   └── index.html              # User instruction documentation page for custom syncing
+├── 404.html                    # Minimalist fallback error page
+├── colors.txt                  # Standard baseline 7-day hexadecimal theme configuration
+├── index.html                  # Core application entry point, UI layout, and theme logic
+├── LICENSE                     # Project license - MIT
+├── .gitignore                  # Specification rules for ignoring untracked system files
+└── README.md                   # Repository documentation and use case handbook
 ```
 
 ## 🎨 Customization
@@ -57,4 +60,5 @@ The `colors.txt` file reads hex codes in sequential order starting from Sunday d
 
 
 ## 📄 License
-This project is open-source and available under the [MIT License](LICENSE).
+
+This project is open-source software licensed under the **MIT License**. Feel free to use, modify, fork, and distribute it as you see fit. See the [LICENSE](LICENSE) file for the full legal text.

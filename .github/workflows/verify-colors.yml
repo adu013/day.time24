@@ -1,0 +1,70 @@
+name: Verify Colors File
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v7
+
+      - name: Validate hex colors and line count in colors.txt
+        run: |
+          # 1. Check if the file exists
+          if [ ! -f "colors.txt" ]; then
+            echo "::error::colors.txt file is missing!"
+            exit 1
+          fi
+
+          # 2. Check if the file is empty
+          if [ ! -s "colors.txt" ]; then
+            echo "::error::colors.txt is empty!"
+            exit 1
+          fi
+
+          # 3. Check for exactly 7 lines total
+          TOTAL_LINES=$(wc -l < colors.txt | xargs)
+          if [ "$TOTAL_LINES" -ne 7 ]; then
+            echo "::error::colors.txt must contain exactly 7 lines. Found $TOTAL_LINES lines."
+            exit 1
+          fi
+
+          echo "Validating colors.txt..."
+
+          # 4. Read the file line by line and validate each hex code
+          INVALID=0
+          LINE_NUM=0
+
+          while IFS= read -r line || [ -n "$line" ]; do
+            LINE_NUM=$((LINE_NUM + 1))
+
+            # Trim leading/trailing whitespaces if any
+            clean_line=$(echo "$line" | xargs)
+
+            # Skip empty lines
+            if [ -z "$clean_line" ]; then
+              continue
+            fi
+
+            # Match EITHER # followed by 6 hex characters OR 3 hex characters
+            if [[ ! "$clean_line" =~ ^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$ ]]; then
+              echo "::error file=colors.txt,line=$LINE_NUM::Invalid hex code on line $LINE_NUM: '$clean_line'"
+              INVALID=$((INVALID + 1))
+            fi
+          done < colors.txt
+
+          # 5. Fail workflow if any invalid formats were found
+          if [ $INVALID -ne 0 ]; then
+            echo "Verification failed. Found $INVALID invalid color code(s)."
+            exit 1
+          else
+            echo "Success! The file has exactly 7 lines and all color codes are valid."
+          fi

@@ -1,6 +1,9 @@
 # day.time24
 A simple lightweight HTML page to quickly check color-coded days of the week.
 
+## 🧠 Why the daily color shifts?
+Time24 uses **visual grounding** to combat "time blindness" and cognitive fatigue. By shifting the entire interface background to a distinct, high-contrast palette each day, the site creates an unmissable visual boundary every time you open or refresh the page. Over time, your brain builds an automatic association with these ambient tones—allowing you to glance at your browser tab and instantly ground yourself in exactly what day of the week it is without reading a single pixel of text.
+
 ## ✨ Features
 * **Visual Anchors:** Displays each day of the week (Sunday through Saturday) with distinct background colors.
 * **Zero Configuration:** No databases, local servers, or command lines required.

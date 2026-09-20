@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | Time24.cc</title>
+    <style>
+        /* Base page layout resetting margins and centering content vertically and horizontally */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #1a1a1a; /* Neutral dark theme fallback for error states */
+            color: #fff;
+            box-sizing: border-box;
+        }
+
+        .container {
+            padding: 5vw;
+            width: 90%;
+            max-width: 1200px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Fluid Typography: Scales smoothly based on the screen width */
+        h1 {
+            font-size: clamp(48px, 10vw, 150px); /* Massive bold 404 statement */
+            margin: 0 0 10px 0;
+            line-height: 1;
+            letter-spacing: -2px;
+        }
+
+        h2 {
+            font-size: clamp(18px, 3vw, 36px);
+            margin: 0 0 40px 0;
+            font-weight: normal;
+            opacity: 0.6;
+            letter-spacing: 1px;
+        }
+
+        /* Minimal return navigation button style */
+        .home-link {
+            font-size: clamp(14px, 1.8vw, 20px);
+            color: #ffc800; /* Signature accent matching Monday's palette */
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid #ffc800;
+            padding: 12px 28px;
+            border-radius: 4px;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .home-link:hover {
+            background-color: #ffc800;
+            color: #1a1a1a;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>404</h1>
+        <h2>PAGE NOT FOUND</h2>
+        <a href="/" class="home-link">GO HOME</a>
+    </div>
+
+</body>
+</html>

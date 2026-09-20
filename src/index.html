@@ -1,283 +1,274 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day | Time24.cc</title>
-    <style>
-        /* Base page layout resetting margins and centering content vertically and horizontally */
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: background-color 0.5s ease;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day | Time24.cc</title>
+  <style>
+    /* Base page layout resetting margins and centering content vertically and horizontally */
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.5s ease;
+      box-sizing: border-box;
+    }
 
-        .container {
-            color: #fff;
-            padding: 5vw;
-            width: 90%;
-            max-width: 1200px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-        }
+    .container {
+      color: #fff;
+      padding: 5vw;
+      width: 90%;
+      max-width: 1200px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    }
 
-        /* Fluid Typography: Scales smoothly based on the screen width */
-        h1 {
-            /* Minimum size: 36px, Ideal scaling size: 6vw, Maximum size: 90px */
-            font-size: clamp(36px, 6vw, 90px);
-            margin: 0 0 20px 0;
-            line-height: 1.2;
-        }
+    /* Fluid Typography: Scales smoothly based on the screen width */
+    h1 {
+      /* Minimum size: 36px, Ideal scaling size: 6vw, Maximum size: 90px */
+      font-size: clamp(36px, 6vw, 90px);
+      margin: 0 0 20px 0;
+      line-height: 1.2;
+    }
 
-        h2 {
-            /* Minimum size: 24px, Ideal scaling size: 4vw, Maximum size: 60px */
-            font-size: clamp(24px, 4vw, 60px);
-            margin: 0 0 20px 0;
-            font-weight: bold;
-            opacity: 0.95;
-            letter-spacing: 1px;
-        }
+    h2 {
+      /* Minimum size: 24px, Ideal scaling size: 4vw, Maximum size: 60px */
+      font-size: clamp(24px, 4vw, 60px);
+      margin: 0 0 20px 0;
+      font-weight: bold;
+      opacity: 0.95;
+      letter-spacing: 1px;
+    }
 
-        .nav-links {
-            margin-top: 25px;
-            font-size: clamp(12px, 1.5vw, 16px);
-        }
+    .nav-links {
+      margin-top: 25px;
+      font-size: clamp(12px, 1.5vw, 16px);
+    }
 
-        .nav-links a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            margin: 0 10px;
-            transition: color 0.2s;
-            cursor: pointer;
-        }
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      margin: 0 10px;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
 
-        .nav-links a:hover {
-            color: #fff;
-            text-decoration: underline;
-        }
+    .nav-links a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
 
-        .config-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            z-index: 100;
-            justify-content: center;
-            align-items: center;
-        }
+    .config-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+    }
 
-        .config-box {
-            background: #222;
-            padding: 30px;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 400px;
-            text-align: left;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-        }
+    .config-box {
+      background: #222;
+      padding: 30px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 400px;
+      text-align: left;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
 
-        .config-box h3 { margin-top: 0; color: #fff; }
-        .config-box label { display: block; margin: 15px 0 5px; color: #ccc; font-size: 14px; }
+    .config-box h3 {
+      margin-top: 0;
+      color: #fff;
+    }
 
-        .config-box input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            background: #333;
-            border: 1px solid #444;
-            color: #fff;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
+    .config-box label {
+      display: block;
+      margin: 15px 0 5px;
+      color: #ccc;
+      font-size: 14px;
+    }
 
-        .btn-group { margin-top: 20px; text-align: right; }
-        .btn {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-left: 10px;
-            font-weight: bold;
-        }
-        .btn-save { background: #ffc800; color: #000; }
-        .btn-cancel { background: #444; color: #fff; }
-    </style>
+    .config-box input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      background: #333;
+      border: 1px solid #444;
+      color: #fff;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .btn-group {
+      margin-top: 20px;
+      text-align: right;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-left: 10px;
+      font-weight: bold;
+    }
+
+    .btn-save {
+      background: #ffc800;
+      color: #000;
+    }
+
+    .btn-cancel {
+      background: #444;
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
-
-    <div class="config-overlay" id="configModal">
-        <div class="config-box">
-            <h3>Theme Settings</h3>
-            <label for="github-username">GitHub Username:</label>
-            <input type="text" id="github-username" placeholder="e.g. octocat">
-            <input type="text" id="website-field-trap" autocomplete="off" tabindex="-1" style="position: absolute; left: -9999px; top: -9999px; display: none !important;">
-
-            <div class="btn-group">
-                <button class="btn btn-cancel" onclick="toggleModal(false)">Cancel</button>
-                <button class="btn btn-save" onclick="saveUsername()">Save & Sync</button>
-            </div>
-        </div>
+  <div class="config-overlay" id="configModal">
+    <div class="config-box">
+      <h3>Theme Settings</h3>
+      <label for="github-username">GitHub Username:</label>
+      <input type="text" id="github-username" placeholder="e.g. octocat">
+      <input type="text" id="website-field-trap" autocomplete="off" tabindex="-1" style="position: absolute; left: -9999px; top: -9999px; display: none !important;">
+      <div class="btn-group">
+        <button class="btn btn-cancel" onclick="toggleModal(false)">Cancel</button>
+        <button class="btn btn-save" onclick="saveUsername()">Save & Sync</button>
+      </div>
     </div>
-
-    <div class="container">
-        <h1><span id="day-of-week">...</span></h1>
-        <h2 id="week-status">Week: -- ----</h2>
-
-        <div class="nav-links">
-            <a onclick="toggleModal(true)">Customize</a>
-            <a href="/how-to-customize" id="how-link">How to Customize</a>
-        </div>
+  </div>
+  <div class="container">
+    <h1>
+      <span id="day-of-week">...</span>
+    </h1>
+    <h2 id="week-status">Week: -- ----</h2>
+    <div class="nav-links">
+      <a onclick="toggleModal(true)">Customize</a>
+      <a href="/how-to-customize" id="how-link">How to Customize</a>
     </div>
+  </div>
+  <script>
+    const dayNameOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const defaultColors = [
+      "#3c4142",  // 0 = Sunday     (Gray)
+      "#ffc800",  // 1 = Monday     (Yellow)
+      "#273e06",  // 2 = Tuesday    (Green)
+      "#a94064",  // 3 = Wednesday  (Pink)
+      "#000042",  // 4 = Thursday   (Blue)
+      "#c30f16",  // 5 = Friday     (Red)
+      "#7b3f00"   // 6 = Saturday   (Brown)
+    ];
+    // GitHub repository name
+    const REPO_NAME = "day.time24";
+    // Function to calculate standard ISO week number
+    function getISOWeekNumber(date) {
+      const target = new Date(date.valueOf());
+      const dayNr = (date.getDay() + 6) % 7;
+      target.setDate(target.getDate() - dayNr + 3);
+      const firstThursday = target.valueOf();
+      target.setMonth(0, 1);
+      if (target.getDay() !== 4) {
+        target.setMonth(0, 1 + ((4 - target.getDay()) + 7) % 7);
+      }
+      return 1 + Math.ceil((firstThursday - target) / 604800000);
+    }
+    // Look up the current date
+    const today = new Date();
+    // Get the day of the week as a number from 0 to 6
+    const dayOfWeek = today.getDay();
+    // Tell the day of the week
+    document.getElementById('day-of-week').innerText = dayNameOfWeek[dayOfWeek].toUpperCase();
+    // Calculate week number and even/odd parity
+    const weekNumber = getISOWeekNumber(today);
+    const parity = (weekNumber % 2 === 0) ? "EVEN" : "ODD";
+    // Display the "Week: XX EVEN/ODD" line
+    document.getElementById('week-status').innerText = `Week: ${weekNumber} ${parity}`;
 
-    <script>
-        const dayNameOfWeek = [
-          "Sunday",
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday"
-        ];
-        const defaultColors = [
-            "#3c4142", // 0 = Sunday     (Gray)
-            "#ffc800", // 1 = Monday     (Yellow)
-            "#273e06", // 2 = Tuesday    (Green)
-            "#a94064", // 3 = Wednesday  (Pink)
-            "#000042", // 4 = Thursday   (Blue)
-            "#c30f16", // 5 = Friday     (Red)
-            "#7b3f00"  // 6 = Saturday   (Brown)
-        ];
-
-        // GitHub repository name
-        const REPO_NAME = "day.time24";
-
-        // Function to calculate standard ISO week number
-        function getISOWeekNumber(date) {
-            const target = new Date(date.valueOf());
-            const dayNr = (date.getDay() + 6) % 7;
-            target.setDate(target.getDate() - dayNr + 3);
-            const firstThursday = target.valueOf();
-            target.setMonth(0, 1);
-            if (target.getDay() !== 4) {
-                target.setMonth(0, 1 + ((4 - target.getDay()) + 7) % 7);
-            }
-            return 1 + Math.ceil((firstThursday - target) / 604800000);
-        }
-
-        // Look up the current date
-        const today = new Date();
-
-        // Get the day of the week as a number from 0 to 6
-        const dayOfWeek = today.getDay();
-
-        // Tell the day of the week
-        document.getElementById('day-of-week').innerText = dayNameOfWeek[dayOfWeek].toUpperCase();
-
-        // Calculate week number and even/odd parity
-        const weekNumber = getISOWeekNumber(today);
-        const parity = (weekNumber % 2 === 0) ? "EVEN" : "ODD";
-
-        // Display the "Week: XX EVEN/ODD" line
-        document.getElementById('week-status').innerText = `Week: ${weekNumber} ${parity}`;
-
-        function toggleModal(show) {
-            const modal = document.getElementById('configModal');
-            modal.style.display = show ? 'flex' : 'none';
-            if (show) {
-                document.getElementById('github-username').value = localStorage.getItem('time24_username') || '';
-            }
-        }
-
-        async function applyTheme(isUserTriggered = false) {
-            const username = localStorage.getItem('time24_username');
-            let activePalette = [...defaultColors];
-
-            if (username) {
-                // Constructs the raw path directly using the username and repository name
-                const rawUrl = `https://raw.githubusercontent.com/${username}/${REPO_NAME}/refs/heads/main/colors.txt`
-                try {
-                    const response = await fetch(rawUrl);
-
-                    // Catch 404 / 403 network profiles indicating the user profile or file doesn't esist
-                    if (!response.ok) {
-                      throw new Error(`File not found.`);
-                    }
-
-                    // Superflowous condition, but I like keeping it.
-                    if (response.ok) {
-                        const textData = await response.text();
-                        const parsedColors = textData.split('\n')
-                            .map(line => line.trim())
-                            .filter(line => line.startsWith('#'));
-
-                        if (parsedColors.length >= 7) {
-                            activePalette = parsedColors;
-
-                            if (isUserTriggered) {
-                              alert("Success! Your theme has been synchronized.");
-                            }
-                        } else {
-                          throw new Error("File found, but it must contains 7 hex colors (starting with #).");
-                        }
-                    }
-                } catch (error) {
-                    console.error("Theme sync failed:", error.message);
-
-                    // Only alert the user if they just clicked the 'Save & Sync' button manually
-                    if (isUserTriggered) {
-                      alert(`Sync Failed: ${error.message}\nPlease check your username and ensure your repository is named '${REPO_NAME}' and is public.`);
-                      // Clean up the bad username so it doesn't try downloading again on next reload
-                      localStorage.removeItem('time24_username');
-                    }
-                }
-            }
-            document.body.style.backgroundColor = activePalette[dayOfWeek];
-        }
-
-        // State tracker variable for the button submission cooldown
-        let lastSubmissionTime = 0;
-
-        function saveUsername() {
-          const now = Date.now();
-          const usernameInput = document.getElementById('github-username').value.trim();
-          const honeypotInput = document.getElementById('website-field-trap').value;
-
-          // [SECURITY] Check Honeypot: If a bot filled out the invisible trap, kill the execution silently
-          if (honeypotInput.length > 0) {
-            console.warn("Spam bot detected and blocked.");
-            toggleModal(false);
-            return;
+    function toggleModal(show) {
+      const modal = document.getElementById('configModal');
+      modal.style.display = show ? 'flex' : 'none';
+      if (show) {
+        document.getElementById('github-username').value = localStorage.getItem('time24_username') || '';
+      }
+    }
+    async function applyTheme(isUserTriggered = false) {
+      const username = localStorage.getItem('time24_username');
+      let activePalette = [...defaultColors];
+      if (username) {
+        // Constructs the raw path directly using the username and repository name
+        const rawUrl = `https://raw.githubusercontent.com/${username}/${REPO_NAME}/refs/heads/main/colors.txt`
+        try {
+          const response = await fetch(rawUrl);
+          // Catch 404 / 403 network profiles indicating the user profile or file doesn't esist
+          if (!response.ok) {
+            throw new Error(`File not found.`);
           }
-
-          // [SECURITY] Cooldown Throttling: Stop users/scripts from clicking multiple times (permit upto 2/sec)
-          if (now - lastSubmissionTime < 500) { // 500 ms is the sweet spot
-            console.warn("Spam bot detected and blocked.");
-            toggleModal(false);
-            return;
-          }
-
-          // Update timestamp markers for rate control verification
-          lastSubmissionTime = now;
-
-            if (usernameInput) {
-                localStorage.setItem('time24_username', usernameInput);
+          // Superflowous condition, but I like keeping it.
+          if (response.ok) {
+            const textData = await response.text();
+            const parsedColors = textData.split('\n').map(line => line.trim()).filter(line => line.startsWith('#'));
+            if (parsedColors.length >= 7) {
+              activePalette = parsedColors;
+              if (isUserTriggered) {
+                alert("Success! Your theme has been synchronized.");
+              }
             } else {
-                localStorage.removeItem('time24_username');
+              throw new Error("File found, but it must contains 7 hex colors (starting with #).");
             }
-            toggleModal(false);
-            // Pass 'true' to signal this sync request was trigerred intentionally
-            // on submission via a button click
-            applyTheme(true);
+          }
+        } catch (error) {
+          console.error("Theme sync failed:", error.message);
+          // Only alert the user if they just clicked the 'Save & Sync' button manually
+          if (isUserTriggered) {
+            alert(`Sync Failed: ${error.message}\nPlease check your username and ensure your repository is named '${REPO_NAME}' and is public.`);
+            // Clean up the bad username so it doesn't try downloading again on next reload
+            localStorage.removeItem('time24_username');
+          }
         }
+      }
+      document.body.style.backgroundColor = activePalette[dayOfWeek];
+    }
+    // State tracker variable for the button submission cooldown
+    let lastSubmissionTime = 0;
 
-        // Initial automatic pass on tab refresh
-        applyTheme(false);
-    </script>
+    function saveUsername() {
+      const now = Date.now();
+      const usernameInput = document.getElementById('github-username').value.trim();
+      const honeypotInput = document.getElementById('website-field-trap').value;
+      // [SECURITY] Check Honeypot: If a bot filled out the invisible trap, kill the execution silently
+      if (honeypotInput.length > 0) {
+        console.warn("Spam bot detected and blocked.");
+        toggleModal(false);
+        return;
+      }
+      // [SECURITY] Cooldown Throttling: Stop users/scripts from clicking multiple times (permit upto 2/sec)
+      if (now - lastSubmissionTime < 500) { // 500 ms is the sweet spot
+        console.warn("Spam bot detected and blocked.");
+        toggleModal(false);
+        return;
+      }
+      // Update timestamp markers for rate control verification
+      lastSubmissionTime = now;
+      if (usernameInput) {
+        localStorage.setItem('time24_username', usernameInput);
+      } else {
+        localStorage.removeItem('time24_username');
+      }
+      toggleModal(false);
+      // Pass 'true' to signal this sync request was trigerred intentionally
+      // on submission via a button click
+      applyTheme(true);
+    }
+    // Initial automatic pass on tab refresh
+    applyTheme(false);
+  </script>
 </body>
 </html>

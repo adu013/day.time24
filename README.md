@@ -1,12 +1,12 @@
 # day.time24
 A simple lightweight HTML page to quickly check color-coded days of the week.
 
-## Features
+## ✨ Features
 * **Visual Anchors:** Displays each day of the week (Sunday through Saturday) with distinct background colors.
 * **Zero Configuration:** No databases, local servers, or command lines required.
 * **Instant Load:** Built using pure HTML, CSS, and basic JavaScript.
 
-## Installation & Usage
+## ⚙️ Installation & Usage
 
 You do not need to install anything or run any setup terminal commands.
 
@@ -14,7 +14,7 @@ You do not need to install anything or run any setup terminal commands.
 2. Open the project folder.
 3. **Double-click** the `index.html` file to launch the dashboard instantly in your default web browser.
 
-## File Structure
+## 📁 File Structure
 * `index.html` - The core structure and entry point of the application.
 
 ```text
@@ -29,7 +29,7 @@ day.time24/
 └── README.md
 ```
 
-## Customization
+## 🎨 Customization
 
 `day.time24.cc` allows you to entirely personalize your 7-day color theme by syncing with your own GitHub profile. Instead of manually editing source code, you can manage your colors directly through version control!
 
@@ -53,5 +53,5 @@ The `colors.txt` file reads hex codes in sequential order starting from Sunday d
 > ⚠️ **Note:** Ensure your forked repository remains **Public** and is named exactly `day.time24` so the website API engine can successfully read your file.
 
 
-## License
+## 📄 License
 This project is open-source and available under the [MIT License](LICENSE).

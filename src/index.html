@@ -192,7 +192,7 @@
             }
         }
 
-        async function applyTheme() {
+        async function applyTheme(isUserTriggered = false) {
             const username = localStorage.getItem('time24_username');
             let activePalette = [...defaultColors];
 
@@ -201,6 +201,13 @@
                 const rawUrl = `https://raw.githubusercontent.com/${username}/${REPO_NAME}/refs/heads/main/colors.txt`
                 try {
                     const response = await fetch(rawUrl);
+
+                    // Catch 404 / 403 network profiles indicating the user profile or file doesn't esist
+                    if (!response.ok) {
+                      throw new Error(`File not found.`);
+                    }
+
+                    // Superflowous condition, but I like keeping it.
                     if (response.ok) {
                         const textData = await response.text();
                         const parsedColors = textData.split('\n')
@@ -209,10 +216,23 @@
 
                         if (parsedColors.length >= 7) {
                             activePalette = parsedColors;
+
+                            if (isUserTriggered) {
+                              alert("Success! Your theme has been synchronized.");
+                            }
+                        } else {
+                          throw new Error("File found, but it must contains 7 hex colors (starting with #).");
                         }
                     }
                 } catch (error) {
-                    console.error("Failed loading remote theme, using defaults.", error);
+                    console.error("Theme sync failed:", error.message);
+
+                    // Only alert the user if they just clicked the 'Save & Sync' button manually
+                    if (isUserTriggered) {
+                      alert(`Sync Failed: ${error.message}\nPlease check your username and ensure your repository is named '${REPO_NAME}' and is public.`);
+                      // Clean up the bad username so it doesn't try downloading again on next reload
+                      localStorage.removeItem('time24_username');
+                    }
                 }
             }
             document.body.style.backgroundColor = activePalette[dayOfWeek];
@@ -226,10 +246,13 @@
                 localStorage.removeItem('time24_username');
             }
             toggleModal(false);
-            applyTheme();
+            // Pass 'true' to signal this sync request was trigerred intentionally
+            // on submission via a button click
+            applyTheme(true);
         }
 
-        applyTheme();
+        // Initial automatic pass on tab refresh
+        applyTheme(false);
     </script>
 </body>
 </html>

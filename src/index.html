@@ -19,6 +19,25 @@
       box-sizing: border-box;
     }
 
+    /* Privacy Badge Styling */
+    .privacy-badge {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: clamp(10px, 1.2vw, 13px);
+      color: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.12);
+      padding: 6px 14px;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      letter-spacing: 0.5px;
+      pointer-events: none; /* Keeps it purely informational so it won't block clicks */
+      white-space: nowrap;
+    }
+
     .container {
       color: #fff;
       padding: 5vw;
@@ -133,6 +152,9 @@
   </style>
 </head>
 <body>
+  <!-- Privacy Badge Capsule -->
+  <div class="privacy-badge">No ads, no tracking</div>
+
   <div class="config-overlay" id="configModal">
     <div class="config-box">
       <h3>Theme Settings</h3>
